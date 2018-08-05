@@ -2,17 +2,23 @@
 import {
   GraphQLSchema,
   GraphQLObjectType
-} from 'graphql';
+} from 'graphql'
 
 import {
   user,
-  users
-} from './user';
+  users,
+  createUser,
+  updateUser,
+  deleteUser
+} from './user'
 
 import {
-  articles
-} from './article';
-
+  articles, 
+  createArticle,
+  updateArticle,
+  deleteArticle
+} from './article'
+ 
 // Queries
 const graphQLSchema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -22,7 +28,18 @@ const graphQLSchema = new GraphQLSchema({
       users,
       articles
     }
+  }),
+  mutation: new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+      createUser,
+      updateUser,
+      deleteUser,
+      createArticle,
+      updateArticle,
+      deleteArticle
+    }
   })
-});
+})
 
-export default graphQLSchema;
+export default graphQLSchema

@@ -2,21 +2,21 @@
 import {
   saveUser,
   fetchUsers
-} from '../controllers/user';
+} from '../controllers/user'
 
 import {
   saveArticle,
   fetchArticles,
   fetchArticleDetail
-} from '../controllers/article';
+} from '../controllers/article'
 
-import Router from 'koa-router';
-const router = new Router();
+import Router from 'koa-router'
+const router = new Router()
 
 router.post('/users', saveUser)
   .get('/users', fetchUsers)
   .post('/articles', saveArticle)
   .get('/articles', fetchArticles)
-  .get('/articles/:articleId', fetchArticleDetail);
+  .get('/articles/:articleId', fetchArticleDetail)
 
-export default router;
+export default router
