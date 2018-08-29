@@ -24,4 +24,4 @@ router.post('/graphql', async (ctx, next) => {
     })(ctx, next)
   });
 
-export default router;
+export default router
