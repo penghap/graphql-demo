@@ -9,8 +9,6 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    # volumes:
-    #   - .:/var/
     environment:
       - NODE_ENV=production
     ports:
