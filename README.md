@@ -11,4 +11,9 @@ npm run start (需先开启mongodb)
 
 访问: http://localhost:4000
 
+docker-compose build
+
+docker-compose up -d
+
+
 ```

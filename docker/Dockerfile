@@ -1,5 +1,5 @@
 # 指定node镜像
-FROM node
+FROM node:alpine
 # 指定制作人（镜像创建者）
 MAINTAINER hap
 

@@ -1,6 +1,10 @@
 .git
+.gitignore
 .DS_Store
 *.log
 *.tar
 *.md
 *.zip
+README.md
+docker-compose.yml
+node_modules
