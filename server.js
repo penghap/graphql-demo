@@ -23,4 +23,5 @@ routes(app)
 const port = config.get('default.port')
 app.listen(port)
 
+console.log(`env=${process.env.NODE_ENV}`)
 console.log(`graphQL server listen port: ${port}`)
