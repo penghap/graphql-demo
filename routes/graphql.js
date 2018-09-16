@@ -22,6 +22,10 @@ router.post('/graphql', async (ctx, next) => {
     await graphiqlKoa({
       endpointURL: '/graphql'
     })(ctx, next)
-  });
+  })
+  .get('/', async (ctx, next) => {
+    ctx.response.redirect('/graphiql')
+    next()
+  })
 
 export default router
