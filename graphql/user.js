@@ -1,7 +1,5 @@
 /*jshint esversion: 6 */
 import {
-  graphql,
-  GraphQLSchema,
   GraphQLObjectType,
   GraphQLInputObjectType,
   GraphQLString,
@@ -9,9 +7,8 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLInt,
-  isOutputType
 } from 'graphql'
-
+import graphqlFields from 'graphql-fields';
 import mongoose from 'mongoose'
 const userModel = mongoose.model('user')
 
@@ -64,13 +61,56 @@ export const userInput = new GraphQLInputObjectType({
   }
 })
 
+
+export const pages = new GraphQLInputObjectType({
+  name: 'userIpagesnput',
+  fields: {
+    limit: {
+      name: 'limit',
+      type: new GraphQLNonNull(GraphQLInt)
+    },
+    offset: {
+      name: 'offset',
+      type: new GraphQLNonNull(GraphQLInt)
+    }
+  }
+})
+
 export const users = {
-  type: new GraphQLList(userType),
+  type: new GraphQLObjectType({
+    name: 'pages',
+    fields: {
+      total: {
+        name: 'total',
+        type: GraphQLInt,
+      },
+      data: {
+        name: 'data',
+        type: new GraphQLList(userType)
+      }
+    }
+  }),
   args: {
-    
+    limit: {
+      name: 'limit',
+      type: new GraphQLNonNull(GraphQLInt)
+    },
+    offset: {
+      name: 'offset',
+      type: new GraphQLNonNull(GraphQLInt)
+    }
   },
-  async resolve(root, params, options) {
-    return userModel.find({}).exec()
+  async resolve(root, params, _, info) {
+    const { data: dataFields } = graphqlFields(info);
+    const projection = Object.keys(dataFields).join(' ');
+    const { limit, offset } = params;
+    const optiosn = { limit, offset };
+    const conds = {};
+    const [data, total] = await Promise.all([
+      userModel.find(conds, projection, optiosn).lean().exec(), //
+      userModel.count(conds)
+    ])
+    return  { total, data }
   }
 }
 

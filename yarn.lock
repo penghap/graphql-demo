@@ -1247,6 +1247,11 @@ graphql-extensions@^0.0.x, graphql-extensions@~0.0.9:
     core-js "^2.5.3"
     source-map-support "^0.5.1"
 
+graphql-fields@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/graphql-fields/-/graphql-fields-2.0.3.tgz#5e68dff7afbb202be4f4f40623e983b22c96ab8f"
+  integrity sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==
+
 graphql-server-koa@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/graphql-server-koa/-/graphql-server-koa-1.4.0.tgz#ed243ebeb53fd93b85b93dd2a81c7fda486f96b5"

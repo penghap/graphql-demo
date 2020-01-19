@@ -9,17 +9,17 @@ import schema from '../graphql/schema'
 const router = new koaRouter();
 
 router.post('/graphql', async (ctx, next) => {
-    await graphqlKoa({
-      schema: schema
+    return graphqlKoa({
+      schema
     })(ctx, next)
   })
   .get('/graphql', async (ctx, next) => {
-    await graphqlKoa({
-      schema: schema
+    return graphqlKoa({
+      schema
     })(ctx, next)
   })
   .get('/graphiql', async (ctx, next) => {
-    await graphiqlKoa({
+    return graphiqlKoa({
       endpointURL: '/graphql'
     })(ctx, next)
   })

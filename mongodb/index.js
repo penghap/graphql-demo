@@ -6,10 +6,10 @@ require('./schema/article')
 import mongoose from 'mongoose'
 import config from 'config'
 const url = config.get('default.dbPath')
-console.log('url', url)
 const options = {
   autoReconnect: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 }
 
 mongoose.set('debug', true)

@@ -4,13 +4,8 @@ import KoaStatic from 'koa-static'
 import bodyParser from 'koa-bodyparser'
 import config from 'config'
 
-import {
-  graphqlKoa,
-  graphiqlKoa
-} from 'graphql-server-koa'
-
 // 引入mongodb
-import db from './mongodb'
+import './mongodb'
 import routes from './routes'
 
 const app = new Koa()
