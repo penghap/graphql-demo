@@ -24,6 +24,11 @@ let articleType = new GraphQLObjectType({
     },
     author: {
       type: userType,
+      resolve(root, params, options) {
+        const author = root.author
+        const conditions = { _id: author };
+        return userModel.findOne(conditions, null).lean().exec()
+      },
     },
     meta: {
       type: metaType,
@@ -37,11 +42,6 @@ export const articles = {
   resolve(root, params, options) {
     let conditions = {};
     return articleModel.find(conditions, null, options)
-      .populate({
-        path: 'user',
-        select: 'name age avatar',
-      })
-      .exec();
   },
 };
 

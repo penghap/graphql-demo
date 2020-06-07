@@ -94,11 +94,11 @@ export const users = {
     const { data: dataFields } = graphqlFields(info);
     const projection = Object.keys(dataFields).join(' ');
     const { limit, offset } = params;
-    const optiosn = { limit, offset };
-    const conds = {};
+    const options = { limit, offset };
+    const conditions = {};
     const [data, total] = await Promise.all([
-      userModel.find(conds, projection, optiosn).lean().exec(), //
-      userModel.count(conds),
+      userModel.find(conditions, projection, options).lean().exec(), //
+      userModel.count(conditions),
     ]);
     return { total, data };
   },
@@ -148,14 +148,14 @@ export const updateUser = {
     },
   },
   async resolve(root, params, options) {
-    let conds = {
+    let conditions = {
       _id: params.id,
     };
     let update = params.input;
     let opts = {
       new: true,
     };
-    let _user = await userModel.findOneAndUpdate(conds, update, opts).exec();
+    let _user = await userModel.findOneAndUpdate(conditions, update, opts).exec();
     return _user;
   },
 };
