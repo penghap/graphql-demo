@@ -1,24 +1,10 @@
 /*jshint esversion: 6 */
-import {
-  GraphQLSchema,
-  GraphQLObjectType
-} from 'graphql'
+import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 
-import {
-  user,
-  users,
-  createUser,
-  updateUser,
-  deleteUser
-} from './user'
+import { user, users, createUser, updateUser, deleteUser } from './user';
 
-import {
-  articles, 
-  createArticle,
-  updateArticle,
-  deleteArticle
-} from './article'
- 
+import { articles, createArticle, updateArticle, deleteArticle } from './article';
+
 // Queries
 const graphQLSchema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -26,8 +12,8 @@ const graphQLSchema = new GraphQLSchema({
     fields: {
       user,
       users,
-      articles
-    }
+      articles,
+    },
   }),
   mutation: new GraphQLObjectType({
     name: 'Mutation',
@@ -37,9 +23,9 @@ const graphQLSchema = new GraphQLSchema({
       deleteUser,
       createArticle,
       updateArticle,
-      deleteArticle
-    }
-  })
-})
+      deleteArticle,
+    },
+  }),
+});
 
-export default graphQLSchema
+export default graphQLSchema;

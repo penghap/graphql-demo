@@ -1,7 +1,7 @@
 # 指定node镜像
 FROM node:alpine
 # 指定制作人（镜像创建者）
-MAINTAINER hap
+LABEL maintainer=aaron
 
 # 将根目录下的文件都copy到container（运行此镜像的容器）文件系统的app文件夹下
 ADD . /app/

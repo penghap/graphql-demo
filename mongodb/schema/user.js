@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
@@ -12,13 +12,13 @@ const userSchema = new Schema({
   meta: {
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
     },
     updatedAt: {
       type: Date,
-      default: Date.now()
-    }
-  }
+      default: Date.now(),
+    },
+  },
 });
 
 userSchema.pre('save', function (next) {

@@ -11,18 +11,18 @@ const articleSchema = new Schema({
   summary: String,
   author: {
     type: ObjectId,
-    ref: 'user'
+    ref: 'user',
   },
   meta: {
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
     },
     updatedAt: {
       type: Date,
-      default: Date.now()
-    }
-  }
+      default: Date.now(),
+    },
+  },
 });
 
 articleSchema.pre('save', function (next) {

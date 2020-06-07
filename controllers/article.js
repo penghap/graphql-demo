@@ -7,28 +7,25 @@ export const saveArticle = async (ctx, next) => {
   const article = new Article(data);
   const one = await article.save();
   ctx.body = one;
-}
+};
 
 export const fetchArticles = async (ctx, next) => {
-  let conds = {}
+  let conditions = {};
   let options = {
     limit: ctx.request.limit || 10,
-    offset: ctx.request.offset || 0
-  }
-  const [articles, total] = await Promise.all([
-    Article.find(conds, null, options).populate({ path: 'user', select: 'name age avatar' }).exec(),
-    Article.countDocuments(conds)
-  ])
+    offset: ctx.request.offset || 0,
+  };
+  const [articles, total] = await Promise.all([Article.find(conditions, null, options).populate({ path: 'user', select: 'name age avatar' }).exec(), Article.countDocuments(conditions)]);
   ctx.body = {
     total,
-    data: articles
-  }
-}
+    data: articles,
+  };
+};
 
 export const fetchArticleDetail = async (ctx, next) => {
-  let conds = {
-    _id: ctx.params.articleId
-  }
-  const article = await Article.findOne(conds).populate({ path: 'author', select: 'name age avatar'}).exec()
-  ctx.body = article
-}
+  let conditions = {
+    _id: ctx.params.articleId,
+  };
+  const article = await Article.findOne(conditions).populate({ path: 'author', select: 'name age avatar' }).exec();
+  ctx.body = article;
+};
