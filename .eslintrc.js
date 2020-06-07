@@ -7,14 +7,13 @@ module.exports = {
   },
   extends: 'eslint:recommended',
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2017,
     sourceType: 'module',
   },
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
-    semi: ['error', 'always'],
     'no-console': 'off',
   },
 };

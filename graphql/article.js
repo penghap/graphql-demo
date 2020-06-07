@@ -35,8 +35,8 @@ export const articles = {
   type: new GraphQLList(articleType),
   args: {},
   resolve(root, params, options) {
-    let conds = {};
-    return Article.find(conds, null, options)
+    let conditions = {};
+    return articleModel.find(conditions, null, options)
       .populate({
         path: 'user',
         select: 'name age avatar',
@@ -73,11 +73,11 @@ export const createArticle = {
   },
   async resolve(root, params, options) {
     let { author } = params.input;
-    let conds = {
+    let conditions = {
       _id: author,
     };
     let projection = '_id';
-    let user = await userModel.findOne(conds, projection).exec();
+    let user = await userModel.findOne(conditions, projection).exec();
     if (!user) {
       return false;
     }
@@ -102,22 +102,22 @@ export const updateArticle = {
   async resolve(root, params, options) {
     let { author } = params.input;
 
-    let conds = {
+    let conditions = {
       _id: author,
     };
     let projection = '_id';
-    let user = await userModel.findOne(conds, projection).exec();
+    let user = await userModel.findOne(conditions, projection).exec();
     if (!user) {
       return false;
     }
-    conds = {
+    conditions = {
       _id: params.id,
     };
     let update = params.input;
     let opts = {
       new: true,
     };
-    return articleModel.findOneAndUpdate(conds, update, opts).exec();
+    return articleModel.findOneAndUpdate(conditions, update, opts).exec();
   },
 };
 
