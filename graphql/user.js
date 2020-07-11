@@ -2,6 +2,9 @@
 import { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import graphqlFields from 'graphql-fields';
 import mongoose from 'mongoose';
+import { profileLoader } from '../dataLoader/profile';
+import { profile } from './profile';
+
 const userModel = mongoose.model('user');
 
 export const metaType = new GraphQLObjectType({
@@ -21,6 +24,7 @@ export const userType = new GraphQLObjectType({
   fields: {
     _id: {
       type: GraphQLID,
+      resolve: (root) => root._id.toString()
     },
     name: {
       type: GraphQLString,
@@ -34,6 +38,14 @@ export const userType = new GraphQLObjectType({
     meta: {
       type: metaType,
     },
+    profile: {
+      type: profile,
+      resolve: async (root) => {
+        const userId = String(root._id);
+        const data = await profileLoader.load(String(userId));
+        return data;
+      },
+    }
   },
 });
 

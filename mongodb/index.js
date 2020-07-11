@@ -2,11 +2,12 @@
 // 引入mongoose模块
 require('./schema/user');
 require('./schema/article');
+require('./schema/profile');
 
 import mongoose from 'mongoose';
 import config from 'config';
 const url = config.get('default.dbPath');
-const options = { autoReconnect: true, useNewUrlParser: true, useUnifiedTopology: true };
+const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
 mongoose.set('debug', true);
 mongoose.connect(url, options);

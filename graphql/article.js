@@ -1,8 +1,10 @@
 /*jshint esversion: 6 */
 import mongoose from 'mongoose';
 import { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
+import { userLoader } from '../dataLoader/user';
 
 import { userType, metaType } from './user';
+
 
 const userModel = mongoose.model('user');
 const articleModel = mongoose.model('article');
@@ -24,10 +26,10 @@ let articleType = new GraphQLObjectType({
     },
     author: {
       type: userType,
-      resolve(root, params, options) {
-        const author = root.author
-        const conditions = { _id: author };
-        return userModel.findOne(conditions, null).lean().exec()
+      resolve: async (root, params, options) => {
+        const author = String(root.author);
+        const data = await userLoader.load(String(author));
+        return data;
       },
     },
     meta: {
