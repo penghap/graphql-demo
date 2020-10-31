@@ -4,7 +4,6 @@ import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { user, users, createUser, updateUser, deleteUser } from './user';
 
 import { articles, createArticle, updateArticle, deleteArticle } from './article';
-
 // Queries
 const graphQLSchema = new GraphQLSchema({
   query: new GraphQLObjectType({

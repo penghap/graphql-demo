@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 import { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import graphqlFields from 'graphql-fields';
+
 import mongoose from 'mongoose';
 import { profileLoader } from '../dataLoader/profile';
 import { profile } from './profile';
@@ -65,7 +66,7 @@ export const userInput = new GraphQLInputObjectType({
 });
 
 export const pages = new GraphQLInputObjectType({
-  name: 'userIpagesnput',
+  name: 'userPageInput',
   fields: {
     limit: {
       name: 'limit',
@@ -141,7 +142,8 @@ export const createUser = {
       type: new GraphQLNonNull(userInput),
     },
   },
-  resolve(root, params, options) {
+  resolve(root, params, context) {
+    pubsub.publish(POST_ADDED, { postAdded: params });
     let user = new userModel(params.input);
     return user.save();
   },
@@ -186,3 +188,7 @@ export const deleteUser = {
     return removed;
   },
 };
+
+// export const userChanged = {
+//   type: userType,
+// }
