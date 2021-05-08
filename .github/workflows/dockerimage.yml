@@ -1,12 +1,19 @@
 name: Docker Image CI
-on: 
-  release: 
-    types: [published]
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Build image'
+        required: true
+        default: 'come on'
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - 
+        run: |
+          echo "Build ${{ github.event.inputs.name }}!"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
