@@ -11,8 +11,18 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Build ${{ github.event.inputs.name }}!"
+      - name: Prepare
+        id: prep
+        run: |
+          DOCKERHUB_IMAGE=peng-huang-cc/graphql-demo
+          GHCR_IMAGE=ghcr.io/${{ github.repository_owner }}/graphql-demo
+          VERSION=${GITHUB_REF#refs/tags/v}
+          # TAGS="${DOCKERHUB_IMAGE}:${VERSION},${DOCKERHUB_IMAGE}:latest"
+          TAGS="${TAGS},${GHCR_IMAGE}:${VERSION},${GHCR_IMAGE}:latest"
+          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=dockerhub_image::${DOCKERHUB_IMAGE}
+          echo ::set-output name=ghcr_image::${GHCR_IMAGE}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
