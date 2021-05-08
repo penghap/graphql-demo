@@ -36,8 +36,8 @@ jobs:
           # context: .
           # file: ./Dockerfile
           push: true
-          tags:  
-            ghcr.io/peng-huang-cc/graphql-demo:${{ github.event.inputs.name }}
+          tags: ${{ steps.prep.outputs.tags }}
+            # ghcr.io/peng-huang-cc/graphql-demo:${{ github.event.inputs.name }}
             # ghcr.io/peng-huang-cc/graphql-demo:latest
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
