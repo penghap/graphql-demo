@@ -3,26 +3,22 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Build image'
+        description: "Build image"
         required: true
-        default: 'come on'
+        default: "come on"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - 
-        run: |
+      - run: |
           echo "Build ${{ github.event.inputs.name }}!"
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -33,13 +29,11 @@ jobs:
       #   with:
       #     username: ${{ secrets.DOCKERHUB_USERNAME }}
       #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+      - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: user/app:latest
-      -
-        name: Image digest
+      - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
