@@ -16,8 +16,8 @@ jobs:
         run: |
           DOCKERHUB_IMAGE=peng-huang-cc/graphql-demo
           GHCR_IMAGE=ghcr.io/${{ github.repository_owner }}/graphql-demo
-          VERSION=${GITHUB_REF#refs/tags/v}
-          # TAGS="${DOCKERHUB_IMAGE}:${VERSION},${DOCKERHUB_IMAGE}:latest"
+          VERSION=${{ github.event.inputs.name }}
+          TAGS="${DOCKERHUB_IMAGE}:${VERSION},${DOCKERHUB_IMAGE}:latest"
           TAGS="${TAGS},${GHCR_IMAGE}:${VERSION},${GHCR_IMAGE}:latest"
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=version::${VERSION}
