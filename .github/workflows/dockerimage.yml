@@ -18,10 +18,15 @@ jobs:
           GHCR_IMAGE=ghcr.io/${{ github.repository_owner }}/graphql-demo
           VERSION=${{ github.event.inputs.name }}
           TAGS="${GHCR_IMAGE}:${VERSION},${GHCR_IMAGE}:latest"
+          echo ::set-output ref=${VERSION}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=dockerhub_image::${DOCKERHUB_IMAGE}
           echo ::set-output name=ghcr_image::${GHCR_IMAGE}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.prep.outputs.ref }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
