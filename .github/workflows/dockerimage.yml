@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: Prepare
         id: prep
+        env:
+          TAG_REF: ${{ github.ref }}
         run: |
           DOCKERHUB_IMAGE=peng-huang-cc/graphql-demo
           GHCR_IMAGE=ghcr.io/${{ github.repository_owner }}/graphql-demo
           VERSION=${{ github.event.inputs.name }}
           TAGS="${GHCR_IMAGE}:${VERSION},${GHCR_IMAGE}:latest"
-          REF="refs/tags/${VERSION}"
+          REF="%{TAG_REF}#refs/tags/${VERSION}"
           echo ::set-output ref=${REF}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=version::${VERSION}
