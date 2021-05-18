@@ -28,8 +28,7 @@ jobs:
           echo ::set-output name=ghcr_image::${GHCR_IMAGE}
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: ${{ steps.prep.outputs.ref }}
+      - run: git checkout ${{steps.prep.outputs.version}}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
